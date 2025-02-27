@@ -1,0 +1,180 @@
+namespace LAB2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Lab 2");
+            //task1_1();
+            //task1_2();
+            //task2();
+            //task3();
+            task4();
+
+        }
+
+        public static void task1_1()
+        {
+            Console.WriteLine("Task 1 для одновимірного масиву ");
+            Console.Write("Введіть розмір масиву: ");
+            int size = int.Parse(Console.ReadLine());
+            int[]array = new int[size];
+            
+
+            Console.WriteLine("Введіть елементи масиву: ");
+
+            for (int i = 0; i < size; i++) {
+                Console.Write("Елемент ["+i+"] ");
+                array[i] = int.Parse(Console.ReadLine());
+                Console.Write("\n");
+            }
+
+            int sum=0;
+            for (int i = 0; i < size; i++)
+            {
+                sum += array[i];
+            }
+
+            if (sum > 10 && sum < 100)
+            {
+                Console.WriteLine("Число двохзначне");
+            }else Console.WriteLine("Число не двохзначне");
+
+        }
+        public static void task1_2()
+        {
+            {
+                Console.WriteLine("Task 1 для двовимірного");
+                Console.Write("Введіть кількість рядків: ");
+                int rows = int.Parse(Console.ReadLine());
+
+                Console.Write("Введіть кількість стовпців: ");
+                int cols = int.Parse(Console.ReadLine());
+
+                int[,] array = new int[rows, cols];
+                
+
+          
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        Console.Write("Елемент [" + i + "," + j + "] =  ");
+                        array[i, j] = int.Parse(Console.ReadLine());
+                        Console.Write("\n");
+                    }
+                }
+
+             
+
+                // Обчислення суми елементів
+                int sum = 0;
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        sum += array[i, j];
+                    }
+                }
+
+                // Перевірка, чи є сума двозначним числом
+                if ((sum >= 10 && sum <= 99) || (sum <= -10 && sum >= -99))
+                {
+                    Console.WriteLine($"Сума елементів  є двозначним числом.");
+                }
+                else
+                {
+                    Console.WriteLine($"Сума елементів не є двозначним числом.");
+                }
+            }
+        }
+        public static void task2()
+        {
+            Console.WriteLine("Task 2 ");
+            Console.Write("Введіть розмір масиву: ");
+            int size = int.Parse(Console.ReadLine());
+
+            int[] array = new int[size];
+            int count = 0;
+
+            Console.WriteLine("Введіть елементи масиву: ");
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write($"Елемент [{i}] = ");
+                array[i] = int.Parse(Console.ReadLine());
+            }
+
+            // Перевіряємо сусідні елементи
+            for (int i = 0; i < size - 1; i++) // тут i < size - 1, щоб уникнути виходу за межі
+            {
+                if (array[i] > array[i + 1])
+                {
+                    count++;
+                }
+            }
+
+            Console.WriteLine($"Кількість елементів, більших за наступний: {count}");
+        }
+        public static void task3()
+        {
+            int sum = 0;
+            int count = 0;
+            Console.Write("Введіть розмірність масиву: ");
+            int n = int.Parse(Console.ReadLine());
+            int[,] array = new int[n, n];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    Console.Write("Елемент [" + i + "," + j + "] =  ");
+                    array[i, j] = int.Parse(Console.ReadLine());
+                    Console.Write("\n");
+                }
+            }
+
+            for (int i = 1; i < n; i++)
+            {  
+                for (int j = n - i; j < n; j++)
+                {
+                    if (array[i, j] != 0)
+                    {
+                        sum += array[i, j];
+                        count++;
+                    }
+                    else continue;
+                }
+            }
+
+            Console.WriteLine("Середнє арифметичне елементів під побічною діагоналлю =" + sum / count);
+
+
+
+        }
+        public static void task4()
+        {
+            int[][] jaggedArray =
+       {
+            new int[] { 3, -2, 5 },
+            new int[] { -1, 4 },
+            new int[] { 6, -3, -7, 2 }
+        };
+
+            int maxColumns = 0;
+            foreach (var row in jaggedArray)
+                if (row.Length > maxColumns)
+                    maxColumns = row.Length;
+
+            int[] negativeSums = new int[maxColumns];
+
+            for (int i = 0; i < jaggedArray.Length; i++)
+                for (int j = 0; j < jaggedArray[i].Length; j++)
+                    if (jaggedArray[i][j] < 0)
+                        negativeSums[j] += jaggedArray[i][j];
+
+            Console.WriteLine("Сума від'ємних елементів у кожному стовпці:");
+            Console.WriteLine(string.Join(" ", negativeSums));
+        
+    }
+        }
+
+    }
